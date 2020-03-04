@@ -33,7 +33,7 @@ echo 'Start  '.date("h:i:sa").PHP_EOL;
 for ($i=0; $i < 5000 ; $i++) {
 	echo 'record '.$i."\r";
 
-	$cittySha = substr(hash("sha256",$i),0,4);
+	$cittySha = substr(hash("sha256",$i),0,17);
 
     $found = $database->has("shaTable", ["sha" =>$cittySha]);
 
