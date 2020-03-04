@@ -1,0 +1,10 @@
+# Subliem Workspace files are user-specific
+*.sublime-workspace
+*.sublime-project
+
+#composer components
+/vendor/
+
+
+#data files for this project
+*.db*
