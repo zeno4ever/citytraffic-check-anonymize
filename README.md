@@ -1,4 +1,4 @@
-# cittytraffic-check-anonymize
+# citytraffic-check-anonymize
 Test how good the 'Citytraffic' methode is to keep your mac private
 
 As far I (Dave Borghuis) can follow the steps of CittyTrafic :
