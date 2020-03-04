@@ -33,7 +33,7 @@ echo 'Start  '.date("h:i:sa").PHP_EOL;
 for ($i=0; $i < 5000 ; $i++) {
 	echo 'record '.$i."\r";
 
-	$cittySha = substr(hash("sha256",$i),0,17);
+	$cittySha = substr(hash("sha256",$i),0,4);
 
     $found = $database->has("shaTable", ["sha" =>$cittySha]);
 
@@ -67,13 +67,5 @@ foreach ($result as $row) {
 };
 
 echo 'Totaal dubbele records ='.$total.PHP_EOL;
-
-//examples of found results
-//1 000 000 => 0 dubbele records
-//5 000 000 => 0 dubbele records
-//16999999 =>0 0
-
-//5000 - 5 chars - 8 dubbel
-//5000 - 4 chars - 183 dubbel (1 a 2 x)
 
 ?>
