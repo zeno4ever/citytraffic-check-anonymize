@@ -7,6 +7,16 @@ require 'vendor/autoload.php';
 use Medoo\Medoo;
  
 
+$cliOptions = getopt('',['shalen::']);
+
+if (isset($cliOptions['shalen'])) {
+  $shaLengt =  $cliOptions['shalen'];
+  echo 'Set length to '.$cliOptions['shalen'].PHP_EOL;
+} else {
+    echo 'Set length to default of 17. Use --shalen=17 to define length.'.PHP_EOL;
+    $shaLengt = 17;
+};
+
 //connect to database Sqlite
 $database = new Medoo([
 	'database_type' => 'sqlite',
@@ -30,10 +40,10 @@ $database->create("shaTable", [
 
 echo 'Start  '.date("h:i:sa").PHP_EOL;
 
-for ($i=0; $i < 5000 ; $i++) {
+for ($i=0; $i < 50000 ; $i++) {
 	echo 'record '.$i."\r";
 
-	$cittySha = substr(hash("sha256",$i),0,17);
+	$cittySha = substr(hash("sha256",$i),0,$shaLengt);
 
     $found = $database->has("shaTable", ["sha" =>$cittySha]);
 
@@ -43,7 +53,6 @@ for ($i=0; $i < 5000 ; $i++) {
             "count" => 0,
         ]);
     } else {
-    	//echo 'Found sha, add +1 - '.$cittySha.PHP_EOL;
         $database->update("shaTable", [
             "count[+]"=>1
         ],
@@ -52,20 +61,21 @@ for ($i=0; $i < 5000 ; $i++) {
     }
 };
 echo PHP_EOL;
-// calculate all double 
-$result = $database->select("shaTable", ["sha",	"count"
+
+$avg_result = $database->avg("shaTable", ["count"
         ],
           ["count[>]"=>0,
           "ORDER" => ["sha"],
-  			]
-    	);
+        ]
+      );
 
+$sum_result = $database->sum("shaTable", ["count"
+        ],
+          ["count[>]"=>0,
+          "ORDER" => ["sha"],
+        ]
+      );
 
-foreach ($result as $row) {
-	echo $row['sha'].' has '.$row['count'].PHP_EOL;
-	$total +=	$row['count'];
-};
-
-echo 'Totaal dubbele records ='.$total.PHP_EOL;
+echo 'Totaal dubbele records ='.$sum_result.' with avarage dubble records '.$avg_result.PHP_EOL;
 
 ?>
