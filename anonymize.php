@@ -6,7 +6,6 @@ require 'vendor/autoload.php';
 // Using Medoo namespace
 use Medoo\Medoo;
  
-
 $cliOptions = getopt('',['shalen::']);
 
 if (isset($cliOptions['shalen'])) {
