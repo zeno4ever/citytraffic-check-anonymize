@@ -7,6 +7,8 @@ As far I (Dave Borghuis) can follow the steps of CittyTrafic :
 
 For the step MAC -> SHA256 City Traffic use a own methode based on SHA256. I don't know in what way it deviates from the standard. 
 
+See also my (dutch) blog on http://daveborghuis.nl/wp/city-traffic-methode_2020_03_04/
+
 The last step is unclear, what data is removed to go from 64 characters to 17 characters. For this test I asume that only the left 17 characters of the sha265 is used. If you have more details I would like to hear from you or better change the code accordingly. 
 
 According to [Gemeente Enschede](https://www.binnenstadsmonitorenschede.nl/bezoekers-weekcijfers) we have around 50.000 visitors per day 
@@ -31,4 +33,3 @@ So in summery, to my opinion (i am no expert) if you reduce the string to 3 or l
 
 ## Install
 To use this script include Medoo libary. I added this with composer, after clone you could do 'composer update' to install the libary.
-
